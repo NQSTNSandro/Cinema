@@ -61,14 +61,55 @@ public class FilmController {
         return ResponseEntity.ok(service.read());
     }
 
-    @PutMapping("/update")
+    @Operation(
+            operationId = "update",
+            summary = "Обновить информацию о фильме",
+            tags = {"CinemaAPI"},
+            responses = {
+                    @ApiResponse(responseCode = "200", description = "success", content = {
+                            @Content(mediaType = "application/json", schema = @Schema(implementation = Integer.class))
+                    }),
+                    @ApiResponse(responseCode = "5XX", description = "Ошибка обновления фильма")
+            }
+    )
+
+    @RequestMapping(method = RequestMethod.POST,
+            value = "/update")
     public ResponseEntity<Object> update(@RequestBody FilmDTO dto) {
         return ResponseEntity.ok(service.update(dto));
     }
-
-    @DeleteMapping("/remove/{id}")
+    @Operation(
+            operationId = "delete",
+            summary = "Удалить фильм",
+            tags = {"CinemaAPI"},
+            responses = {
+                    @ApiResponse(responseCode = "200", description = "success", content = {
+                            @Content(mediaType = "application/json", schema = @Schema(implementation = Integer.class))
+                    }),
+                    @ApiResponse(responseCode = "5XX", description = "Ошибка удаления фильма")
+            }
+    )
+    @RequestMapping(method = RequestMethod.DELETE,
+    value = "/delete/{id}")
     public ResponseEntity<Integer> delete(@PathVariable(name = "id") int id) {
         return ResponseEntity.ok(service.remove(id));
+    }
+    @Operation(
+            operationId = "patch",
+            summary = "Обновить рейтинг фильма",
+            tags = {"CinemaAPI"},
+            responses = {
+                    @ApiResponse(responseCode = "200", description = "success", content = {
+                            @Content(mediaType = "application/json", schema = @Schema(implementation = Integer.class))
+                    }),
+                    @ApiResponse(responseCode = "5XX", description = "Ошибка обновленияя рейтинга фильма")
+            }
+    )
+    @RequestMapping(method = RequestMethod.PATCH,
+    value = "/patch")
+    public ResponseEntity<Integer> patch(@RequestBody FilmDTO dto) {
+        return ResponseEntity.ok(service.patch(dto));
+
     }
 
 

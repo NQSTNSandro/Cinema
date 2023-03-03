@@ -23,12 +23,12 @@ public class FilmService {
     public ArrayList<Film> read(){
         return new ArrayList<>(filmRepository.findAll());
     }
-    public boolean update(FilmDTO dto){
+    public int update(FilmDTO dto){
         if(filmRepository.existsById(dto.getId())){
             Film film= mapper.dtoToEntity(dto);
             film.setId(dto.getId());
-            filmRepository.save(film);
-            return true;
+
+            return filmRepository.save(film).getId();
         }
         throw new BadInputException(String.format("Ненайден фильм по id: %d",dto.getId()));
     }
@@ -38,5 +38,17 @@ public class FilmService {
             return id;
         }
         throw new BadInputException(String.format("Ненайден фильм по id: %d",id));
+    }
+
+    public int patch(FilmDTO dto) {
+        if(filmRepository.existsById(dto.getId())){
+            Film film= filmRepository.getById(dto.getId());
+            if(dto.getStartDate()!=null)
+                film.setStartDate(dto.getStartDate());
+            if(dto.getRating()!=null)
+                film.setRating(dto.getRating());
+            return filmRepository.save(film).getId();
+        }
+        throw new BadInputException(String.format("Ненайден фильм по id: %d",dto.getId()));
     }
 }

@@ -8,9 +8,9 @@ import java.time.LocalDate;
 public class FilmDTO {
     private int id;
     private  String title;
-    private int duration;
-    private float licenceCost;
+    private Integer duration;
+    private Float licenceCost;
     private LocalDate startDate;
-    private int ageRestrictions;
-    private float rating;
+    private Integer ageRestrictions;
+    private Float rating;
 }
