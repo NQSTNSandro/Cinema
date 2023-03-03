@@ -3,25 +3,37 @@ package com.example.demo.services;
 import com.example.demo.DTO.FilmDTO;
 import com.example.demo.exception.BadInputException;
 import com.example.demo.mapper.FilmMapper;
+import com.example.demo.repositories.ActorRepository;
 import com.example.demo.repositories.FilmRepository;
 import lombok.AllArgsConstructor;
 import com.example.demo.moduls.Film;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
 
 @Service
 @AllArgsConstructor
 public class FilmService {
     private final FilmRepository filmRepository;
+    private final ActorRepository actorRepository;
     private final FilmMapper mapper;
-
+    @Transactional
     public int save(FilmDTO dto){
-        return filmRepository.save(mapper.dtoToEntity(dto)).getId();
+        Film film=mapper.dtoToEntity(dto);
+        film.setActors(new HashSet<>(actorRepository.saveAll(film.getActors())));
+        return filmRepository.save(film).getId();
     }
-
-    public ArrayList<Film> read(){
-        return new ArrayList<>(filmRepository.findAll());
+    @Transactional
+    public List<FilmDTO> read(){
+        List<Film> film = filmRepository.findAll();
+        List<FilmDTO> dtos=new ArrayList<>();
+        for(Film f: film) {
+            dtos.add(mapper.entityToDto(f));
+        }
+        return dtos;
     }
     public int update(FilmDTO dto){
         if(filmRepository.existsById(dto.getId())){

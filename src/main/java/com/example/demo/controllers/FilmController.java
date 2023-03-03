@@ -57,7 +57,7 @@ public class FilmController {
             method = RequestMethod.GET,
             value = "/read"
     )
-    public ResponseEntity<List<Film>> read() {
+    public ResponseEntity<List<FilmDTO>> read() {
         return ResponseEntity.ok(service.read());
     }
 
