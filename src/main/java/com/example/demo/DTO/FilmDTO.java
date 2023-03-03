@@ -6,6 +6,7 @@ import java.time.LocalDate;
 
 @Data
 public class FilmDTO {
+    private int id;
     private  String title;
     private int duration;
     private float licenceCost;
