@@ -1,11 +1,11 @@
 package com.example.demo.moduls;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity(name = "country")
 @Getter
@@ -15,4 +15,11 @@ public class Country {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String name;
+    @ManyToMany(cascade = { CascadeType.ALL })
+    @JoinTable(
+            name = "country_linker",
+            joinColumns = { @JoinColumn(name = "country_id") },
+            inverseJoinColumns = { @JoinColumn(name = "film_id") }
+    )
+    Set<Film> films = new HashSet<>();
 }

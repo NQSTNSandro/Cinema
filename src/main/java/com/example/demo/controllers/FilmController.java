@@ -1,6 +1,6 @@
 package com.example.demo.controllers;
 
-import com.example.demo.DTO.FilmDTO;
+import com.example.demo.DTO.FilmDto;
 import com.example.demo.moduls.Film;
 import com.example.demo.services.FilmService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -38,7 +38,7 @@ public class FilmController {
             value = "/create",
             consumes = {"application/json"}
     )
-    public ResponseEntity<Integer> save(@RequestBody FilmDTO dto) {
+    public ResponseEntity<Integer> save(@RequestBody FilmDto dto) {
         return ResponseEntity.ok(service.save(dto));
     }
 
@@ -57,7 +57,7 @@ public class FilmController {
             method = RequestMethod.GET,
             value = "/read"
     )
-    public ResponseEntity<List<FilmDTO>> read() {
+    public ResponseEntity<List<FilmDto>> read() {
         return ResponseEntity.ok(service.read());
     }
 
@@ -75,7 +75,7 @@ public class FilmController {
 
     @RequestMapping(method = RequestMethod.POST,
             value = "/update")
-    public ResponseEntity<Object> update(@RequestBody FilmDTO dto) {
+    public ResponseEntity<Object> update(@RequestBody FilmDto dto) {
         return ResponseEntity.ok(service.update(dto));
     }
     @Operation(
@@ -107,7 +107,7 @@ public class FilmController {
     )
     @RequestMapping(method = RequestMethod.PATCH,
     value = "/patch")
-    public ResponseEntity<Integer> patch(@RequestBody FilmDTO dto) {
+    public ResponseEntity<Integer> patch(@RequestBody FilmDto dto) {
         return ResponseEntity.ok(service.patch(dto));
 
     }

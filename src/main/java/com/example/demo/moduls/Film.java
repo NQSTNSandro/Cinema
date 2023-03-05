@@ -29,6 +29,15 @@ public class Film {
 */
     @ManyToMany(mappedBy = "films")
     private Set<Actor> actors = new HashSet<>();
+    @ManyToMany(mappedBy = "films")
+    private Set<Director> directors=new HashSet<>();
+    @ManyToMany(mappedBy = "films")
+    private Set<Genre> genres=new HashSet<>();
+    @ManyToMany(mappedBy = "films")
+    private Set<Company> companies=new HashSet<>();
+    @ManyToMany(mappedBy = "films")
+    private Set<Country> countries=new HashSet<>();
+
 
 
 }
