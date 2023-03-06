@@ -2,6 +2,7 @@ package com.example.demo.mapper;
 
 import com.example.demo.DTO.ActorDto;
 import com.example.demo.moduls.Actor;
+import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
 import java.util.Set;

@@ -1,11 +1,8 @@
 package com.example.demo.moduls;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
-import org.hibernate.validator.internal.util.stereotypes.Lazy;
 
 import java.time.LocalDate;
 import java.util.HashSet;
@@ -37,7 +34,6 @@ public class Film {
     private Set<Company> companies=new HashSet<>();
     @ManyToMany(mappedBy = "films")
     private Set<Country> countries=new HashSet<>();
-
-
-
+    @OneToMany(mappedBy = "film")
+    private Set<Session> session_s=new HashSet<>();
 }
