@@ -17,14 +17,16 @@ import java.util.List;
 import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.*;
+
 @SpringBootTest
 class FilmMapperTest {
     @Autowired
     private FilmMapper filmMapper;
+
     @Test
-    void noTransactionErrorCheck(){
-        Film film=getNewFilm();
-        Assertions.assertThrows(IllegalTransactionStateException.class,()->filmMapper.entityToDto(film));
+    void noTransactionErrorCheck() {
+        Film film = getNewFilm();
+        Assertions.assertThrows(IllegalTransactionStateException.class, () -> filmMapper.entityToDto(film));
     }
 
     @Test
@@ -32,28 +34,49 @@ class FilmMapperTest {
     void entityToDto() {
         Film film = getNewFilm();
         FilmDto filmDto = filmMapper.entityToDto(film);
-        Assertions.assertEquals(film.getId(),filmDto.getId());
-        Assertions.assertEquals(film.getRating(),filmDto.getRating());
-        Assertions.assertEquals(film.getDuration(),filmDto.getDuration());
-        Assertions.assertEquals(film.getTitle(),filmDto.getTitle());
-        Assertions.assertEquals(film.getAgeRestrictions(),filmDto.getAgeRestrictions());
-        Assertions.assertEquals(film.getStartDate(),filmDto.getStartDate());
+        Assertions.assertEquals(film.getId(), filmDto.getId());
+        Assertions.assertEquals(film.getRating(), filmDto.getRating());
+        Assertions.assertEquals(film.getDuration(), filmDto.getDuration());
+        Assertions.assertEquals(film.getTitle(), filmDto.getTitle());
+        Assertions.assertEquals(film.getAgeRestrictions(), filmDto.getAgeRestrictions());
+        Assertions.assertEquals(film.getStartDate(), filmDto.getStartDate());
     }
 
     @Transactional
     @Test
-    void actorsMappingTest(){
-        Film film=getNewFilm();
+    void actorsMappingTest() {
+        Film film = getNewFilm();
         film.setActors(Set.of(getNewActor(Set.of(film))));
-        FilmDto filmDto= filmMapper.entityToDto(film);
-        Assertions.assertEquals(1,filmDto.getActors().size());
+        FilmDto filmDto = filmMapper.entityToDto(film);
+        Assertions.assertEquals(1, filmDto.getActors().size());
     }
 
-
-
+    @Transactional
     @Test
     void dtoToEntity() {
+        FilmDto filmDto = getNewFilmDto();
+        Film film = filmMapper.dtoToEntity(filmDto);
+        Assertions.assertEquals(filmDto.getRating(), film.getRating());
+        Assertions.assertEquals(filmDto.getDuration(), film.getDuration());
+        Assertions.assertEquals(filmDto.getTitle(), film.getTitle());
+        Assertions.assertEquals(filmDto.getAgeRestrictions(), film.getAgeRestrictions());
+        Assertions.assertEquals(filmDto.getStartDate(), film.getStartDate());
+        Assertions.assertEquals(filmDto.getLicenceCost(), film.getLicenceCost());
+
     }
+
+    private FilmDto getNewFilmDto() {
+        FilmDto filmDto = new FilmDto();
+        filmDto.setId(1);
+        filmDto.setRating(16F);
+        filmDto.setDuration(3600);
+        filmDto.setTitle("1234");
+        filmDto.setAgeRestrictions(16);
+        filmDto.setStartDate(LocalDate.now());
+        filmDto.setLicenceCost(25F);
+        return filmDto;
+    }
+
     private Film getNewFilm() {
         Film film = new Film();
         film.setId(1);
