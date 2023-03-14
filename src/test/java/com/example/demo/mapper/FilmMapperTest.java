@@ -1,6 +1,5 @@
 package com.example.demo.mapper;
 
-import com.example.demo.DTO.ActorDto;
 import com.example.demo.DTO.FilmDto;
 import com.example.demo.moduls.Actor;
 import com.example.demo.moduls.Film;
@@ -12,8 +11,6 @@ import org.springframework.transaction.IllegalTransactionStateException;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -74,6 +71,11 @@ class FilmMapperTest {
         filmDto.setAgeRestrictions(16);
         filmDto.setStartDate(LocalDate.now());
         filmDto.setLicenceCost(25F);
+        filmDto.setActors(Set.of());
+        filmDto.setCompanies(Set.of());
+        filmDto.setDirectors(Set.of());
+        filmDto.setCountries(Set.of());
+        filmDto.setGenres(Set.of());
         return filmDto;
     }
 

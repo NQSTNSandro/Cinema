@@ -1,4 +1,19 @@
 package com.example.demo.services;
 
-public class DirectorService {
+import com.example.demo.DTO.DirectorDto;
+import com.example.demo.mapper.DirectorMapper;
+import com.example.demo.moduls.Director;
+import com.example.demo.repositories.DirectorRepository;
+import org.springframework.stereotype.Service;
+
+@Service
+public class DirectorService extends ServiceInterface<Director, DirectorRepository, DirectorMapper, DirectorDto> {
+    public DirectorService(DirectorRepository repository, DirectorMapper mapper) {
+        super(repository, mapper);
+    }
+
+    @Override
+    public int save(DirectorDto dto) {
+        return repository.save(mapper.dtoToEntity(dto)).getId();
+    }
 }

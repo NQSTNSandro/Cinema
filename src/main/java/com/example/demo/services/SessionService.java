@@ -16,12 +16,10 @@ import java.util.List;
 @AllArgsConstructor
 public class SessionService {
     private final SessionRepository sessionRepository;
-    private final RoomRepository roomRepository;
     private final SessionMapper mapper;
     @Transactional
     public int save(SessionDto sessionDto){
         Session session_= mapper.dtoToEntity(sessionDto);
-        /*session_.setRooms(new HashSet<>(roomRepository.saveAll(session_.getRooms())));*/
         return sessionRepository.save(session_).getId();
     }
     @Transactional

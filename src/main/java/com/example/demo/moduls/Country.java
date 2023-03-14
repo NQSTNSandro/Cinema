@@ -15,11 +15,6 @@ public class Country {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String name;
-    @ManyToMany(cascade = { CascadeType.ALL })
-    @JoinTable(
-            name = "country_linker",
-            joinColumns = { @JoinColumn(name = "country_id") },
-            inverseJoinColumns = { @JoinColumn(name = "film_id") }
-    )
+    @ManyToMany(cascade = { CascadeType.ALL },fetch = FetchType.LAZY, mappedBy = "countries")
     Set<Film> films = new HashSet<>();
 }

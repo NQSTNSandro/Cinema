@@ -21,18 +21,40 @@ public class Film {
     private LocalDate startDate;
     private int ageRestrictions;
     private float rating;
-/*
-    @JsonManagedReference
-*/
-    @ManyToMany(mappedBy = "films")
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(
+            name = "film_actor",
+            joinColumns = { @JoinColumn(name = "film_id") },
+            inverseJoinColumns = { @JoinColumn(name = "actor_id") }
+    )
     private Set<Actor> actors = new HashSet<>();
-    @ManyToMany(mappedBy = "films")
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(
+            name = "film_director",
+            joinColumns = { @JoinColumn(name = "film_id") },
+            inverseJoinColumns = { @JoinColumn(name = "director_id") }
+    )
     private Set<Director> directors=new HashSet<>();
-    @ManyToMany(mappedBy = "films")
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(
+            name = "film_genre",
+            joinColumns = { @JoinColumn(name = "film_id") },
+            inverseJoinColumns = { @JoinColumn(name = "genre_id") }
+    )
     private Set<Genre> genres=new HashSet<>();
-    @ManyToMany(mappedBy = "films")
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(
+            name = "film_company",
+            joinColumns = { @JoinColumn(name = "film_id") },
+            inverseJoinColumns = { @JoinColumn(name = "company_id") }
+    )
     private Set<Company> companies=new HashSet<>();
-    @ManyToMany(mappedBy = "films")
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(
+            name = "film_country",
+            joinColumns = { @JoinColumn(name = "film_id") },
+            inverseJoinColumns = { @JoinColumn(name = "country_id") }
+    )
     private Set<Country> countries=new HashSet<>();
     @OneToMany(mappedBy = "film")
     private Set<Session> session_s=new HashSet<>();

@@ -17,20 +17,10 @@ import java.util.List;
 @AllArgsConstructor
 public class FilmService {
     private final FilmRepository filmRepository;
-    private final ActorRepository actorRepository;
-    private final CountryRepository countryRepository;
-    private final CompanyRepository companyRepository;
-    private final DirectorRepository directorRepository;
-    private final GenreRepository genreRepository;
     private final FilmMapper mapper;
     @Transactional
     public int save(FilmDto dto){
         Film film=mapper.dtoToEntity(dto);
-        film.setActors(new HashSet<>(actorRepository.saveAll(film.getActors())));
-        film.setCountries(new HashSet<>(countryRepository.saveAll(film.getCountries())));
-        film.setDirectors(new HashSet<>(directorRepository.saveAll(film.getDirectors())));
-        film.setCompanies(new HashSet<>(companyRepository.saveAll(film.getCompanies())));
-        film.setGenres(new HashSet<>(genreRepository.saveAll(film.getGenres())));
         return filmRepository.save(film).getId();
     }
     @Transactional
@@ -58,7 +48,9 @@ public class FilmService {
         }
         throw new BadInputException(String.format("Ненайден фильм по id: %d",id));
     }
-
+    public FilmDto findById(int id){
+        return mapper.entityToDto(filmRepository.findById(id).orElseThrow());
+    }
     public int patch(FilmDto dto) {
         if(filmRepository.existsById(dto.getId())){
             Film film= filmRepository.getById(dto.getId());

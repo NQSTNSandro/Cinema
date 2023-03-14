@@ -12,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 @AllArgsConstructor
 public class SessionMapper extends MapperInterface<Session, SessionDto> {
     private final RoomMapper roomMapper;
+    private final FilmMapper filmMapper;
 
     @Override
     public Session dtoToEntity(SessionDto dto) {
@@ -19,9 +20,8 @@ public class SessionMapper extends MapperInterface<Session, SessionDto> {
         session_.setCost((dto.getCost()));
         session_.setDate(dto.getDate());
         session_.setId(dto.getId());
-        session_.setFilm(dto.getFilm());
-        /*session_.setRooms(roomMapper.dtosToEntities(dto.getRooms()));*/
-        session_.setRoomId(1);
+        session_.setRoom(roomMapper.dtoToEntity(dto.getRoom()));
+        session_.setFilm(filmMapper.dtoToEntity(dto.getFilm()));
         return session_;
     }
 
@@ -31,8 +31,8 @@ public class SessionMapper extends MapperInterface<Session, SessionDto> {
         sessionDto.setCost(session_.getCost());
         sessionDto.setDate(session_.getDate());
         sessionDto.setId(session_.getId());
-        sessionDto.setFilm(session_.getFilm());
-        /*sessionDto.setRooms(roomMapper.entitiesToDtos(session_.getRooms()));*/
+        sessionDto.setRoom(roomMapper.entityToDto(session_.getRoom()));
+        sessionDto.setFilm(filmMapper.entityToDto(session_.getFilm()));
         return sessionDto;
     }
 }

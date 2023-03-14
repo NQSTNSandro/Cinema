@@ -15,11 +15,6 @@ public class Genre {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String type;
-    @ManyToMany(cascade = { CascadeType.ALL })
-    @JoinTable(
-            name = "genre_linker",
-            joinColumns = { @JoinColumn(name = "genre_id") },
-            inverseJoinColumns = { @JoinColumn(name = "film_id") }
-    )
+    @ManyToMany(cascade = { CascadeType.ALL },fetch = FetchType.LAZY, mappedBy = "genres")
     Set<Film> films = new HashSet<>();
 }

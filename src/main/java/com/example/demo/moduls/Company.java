@@ -16,11 +16,6 @@ public class Company {
     private int id;
     private String name;
     private int foundation;
-    @ManyToMany(cascade = { CascadeType.ALL })
-    @JoinTable(
-            name = "company_linker",
-            joinColumns = { @JoinColumn(name = "company_id") },
-            inverseJoinColumns = { @JoinColumn(name = "film_id") }
-    )
+    @ManyToMany(cascade = { CascadeType.ALL },fetch = FetchType.LAZY, mappedBy = "companies")
     Set<Film> films = new HashSet<>();
 }

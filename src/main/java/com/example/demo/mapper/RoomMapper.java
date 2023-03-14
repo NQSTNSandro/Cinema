@@ -14,7 +14,6 @@ public class RoomMapper extends MapperInterface<Room, RoomDto> {
         room.setProjector(dto.getProjector());
         room.setType(dto.getType());
         room.setTotalPlaces(dto.getTotalPlaces());
-
         return room;
     }
 

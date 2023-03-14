@@ -1,3 +1,5 @@
 databaseChangeLog:
   - include:
       file: db/init.sql
+  - include:
+      file: db/01_room.sql

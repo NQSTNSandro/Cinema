@@ -1,11 +1,11 @@
 package com.example.demo.moduls;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity(name = "ad_type")
 @Getter
@@ -15,4 +15,6 @@ public class AdType {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String type;
+    @OneToMany(cascade = CascadeType.ALL)
+    private Set<Advertising> advertisings=new HashSet<>();
 }

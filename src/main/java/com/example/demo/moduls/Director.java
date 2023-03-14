@@ -16,11 +16,6 @@ public class Director {
     private int id;
     private String fio;
 
-    @ManyToMany(cascade = { CascadeType.ALL })
-    @JoinTable(
-            name = "director_linker",
-            joinColumns = { @JoinColumn(name = "director_id") },
-            inverseJoinColumns = { @JoinColumn(name = "film_id") }
-    )
+    @ManyToMany(cascade = { CascadeType.ALL },fetch = FetchType.LAZY, mappedBy = "directors")
     Set<Film> films = new HashSet<>();
 }

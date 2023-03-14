@@ -1,11 +1,11 @@
 package com.example.demo.moduls;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity(name = "client")
 @Getter
@@ -15,11 +15,15 @@ public class Client {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private boolean type;
+    @Column(name="e-mail")
     private String email;
     private String phone;
     private Integer inn;
     private String kpp;
     private String title;
     private String address;
+    private String ogrnip;
+    @OneToMany(cascade = CascadeType.ALL)
+    private Set<Advertising> advertisings=new HashSet<>();
 
 }

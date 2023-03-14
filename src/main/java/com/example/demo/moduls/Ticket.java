@@ -1,18 +1,17 @@
 package com.example.demo.moduls;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
 @Entity(name = "ticket")
 @Getter
 @Setter
-public class Ticket_ {
+public class Ticket {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    private int bookingId;
+    private int ticketNumber;
+    @OneToOne(cascade = CascadeType.ALL,mappedBy = "ticket")
+    private Booking booking;
 }

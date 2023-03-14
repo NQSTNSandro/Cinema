@@ -5,6 +5,8 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.time.LocalDate;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity(name = "session")
 @Getter
@@ -18,6 +20,16 @@ public class Session {
     private Film film;
     private LocalDate date;
     private float cost;
-    /*private Set<Room> rooms;*/
-    private int roomId;
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "room_id")
+    private Room room;
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(
+            name = "session_ad",
+            joinColumns = { @JoinColumn(name = "session_id") },
+            inverseJoinColumns = { @JoinColumn(name = "advertising_id") }
+    )
+    private Set<Advertising> advertisings =new HashSet<>();
+    @OneToMany(cascade = CascadeType.ALL)
+    private Set<Booking> bookings=new HashSet<>();
 }
