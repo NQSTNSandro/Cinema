@@ -6,6 +6,7 @@ import com.example.demo.moduls.AdType;
 import com.example.demo.repositories.AdTypeRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class AdTypeService extends ServiceInterface<AdType,AdTypeRepository,AdTypeMapper,AdTypeDto> {
@@ -14,6 +15,7 @@ public class AdTypeService extends ServiceInterface<AdType,AdTypeRepository,AdTy
     public AdTypeService(AdTypeRepository repository, AdTypeMapper mapper) {
         super(repository, mapper);
     }
+    @Transactional
 
     @Override
     public int save(AdTypeDto dto) {

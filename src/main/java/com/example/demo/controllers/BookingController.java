@@ -2,7 +2,6 @@ package com.example.demo.controllers;
 
 import com.example.demo.DTO.BookingDto;
 import com.example.demo.moduls.Booking;
-import com.example.demo.moduls.Film;
 import com.example.demo.services.BookingService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;

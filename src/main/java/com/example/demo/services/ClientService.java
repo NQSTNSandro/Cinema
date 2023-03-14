@@ -5,12 +5,14 @@ import com.example.demo.mapper.ClientMapper;
 import com.example.demo.moduls.Client;
 import com.example.demo.repositories.ClientRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class ClientService extends ServiceInterface<Client, ClientRepository, ClientMapper, ClientDto> {
     public ClientService(ClientRepository repository, ClientMapper mapper) {
         super(repository, mapper);
     }
+    @Transactional
 
     @Override
     public int save(ClientDto dto) {

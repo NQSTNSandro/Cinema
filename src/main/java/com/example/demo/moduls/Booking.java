@@ -18,6 +18,7 @@ public class Booking {
     private int place;
     private boolean type;
     @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "booking_id")
     private Ticket ticket;
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "session_id")

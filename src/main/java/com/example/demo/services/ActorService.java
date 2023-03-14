@@ -16,6 +16,7 @@ import java.util.Set;
 public class ActorService {
     private final ActorRepository repository;
     private final ActorMapper mapper;
+    @Transactional
 
     public int addActor(ActorDto dto) {
         return repository.save(mapper.dtoToEntity(dto)).getId();
