@@ -9,12 +9,13 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
-public class AdTypeService extends ServiceInterface<AdType,AdTypeRepository,AdTypeMapper,AdTypeDto> {
+public class AdTypeService extends ServiceInterface<AdType, AdTypeRepository, AdTypeMapper, AdTypeDto> {
 
 
     public AdTypeService(AdTypeRepository repository, AdTypeMapper mapper) {
         super(repository, mapper);
     }
+
     @Transactional
 
     @Override

@@ -18,9 +18,9 @@ public class Room {
     private int totalPlaces;
     private String type;
     private String projector;
-    @OneToMany(cascade = {CascadeType.ALL})
-    private Set<Session> sessions=new HashSet<>();
-    @OneToMany(cascade = CascadeType.ALL)
-    private Set<Row> rows=new HashSet<>();
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "room")
+    private Set<Session> sessions = new HashSet<>();
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "room")
+    private Set<Row> rows = new HashSet<>();
 
 }

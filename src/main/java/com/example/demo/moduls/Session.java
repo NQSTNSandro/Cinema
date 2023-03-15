@@ -30,6 +30,6 @@ public class Session {
             inverseJoinColumns = { @JoinColumn(name = "advertising_id") }
     )
     private Set<Advertising> advertisings =new HashSet<>();
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL,mappedBy = "session")
     private Set<Booking> bookings=new HashSet<>();
 }

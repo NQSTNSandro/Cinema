@@ -7,6 +7,8 @@ import com.example.demo.repositories.BookingRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Service
 public class BookingService extends ServiceInterface<Booking, BookingRepository, BookingMapper, BookingDto>{
 
@@ -17,5 +19,10 @@ public class BookingService extends ServiceInterface<Booking, BookingRepository,
     @Override
     public int save(BookingDto dto) {
         return repository.save(mapper.dtoToEntity(dto)).getId();
+    }
+    @Transactional
+    @Override
+    public List<BookingDto> read() {
+        return super.read();
     }
 }

@@ -12,6 +12,7 @@ public class Ticket {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private int ticketNumber;
-    @OneToOne(cascade = CascadeType.ALL,mappedBy = "ticket")
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "booking_id")
     private Booking booking;
 }

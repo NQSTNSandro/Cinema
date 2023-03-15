@@ -23,7 +23,7 @@ public class Client {
     private String title;
     private String address;
     private String ogrnip;
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL,mappedBy = "client")
     private Set<Advertising> advertisings=new HashSet<>();
 
 }

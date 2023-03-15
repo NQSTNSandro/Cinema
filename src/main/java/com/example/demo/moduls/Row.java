@@ -20,6 +20,6 @@ public class Row {
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "room_id")
     private Room room;
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL,mappedBy = "row")
     private Set<Booking> bookings=new HashSet<>();
 }
