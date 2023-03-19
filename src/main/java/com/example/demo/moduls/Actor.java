@@ -1,5 +1,6 @@
 package com.example.demo.moduls;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -15,6 +16,7 @@ public class Actor {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String fio;
-    @ManyToMany(cascade = { CascadeType.ALL },fetch = FetchType.LAZY, mappedBy = "actors")
+    @JsonIgnore
+    @ManyToMany(cascade = {CascadeType.ALL}, fetch = FetchType.LAZY, mappedBy = "actors")
     Set<Film> films = new HashSet<>();
 }

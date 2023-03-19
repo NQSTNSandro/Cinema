@@ -15,7 +15,7 @@ public class RoomServiceTest {
     private RoomService roomService;
 
     @Test
-    public void saveTest() {
+    public void ReadTest() {
         Assertions.assertEquals(1,roomService.read().size());
     }
 

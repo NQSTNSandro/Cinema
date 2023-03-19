@@ -3,3 +3,5 @@ databaseChangeLog:
       file: db/init.sql
   - include:
       file: db/01_room.sql
+  - include:
+      file: db/02_film.sql

@@ -14,7 +14,6 @@ public class TicketService extends ServiceInterface<Ticket,TicketRepository, Tic
         super(repository, mapper);
     }
     @Transactional
-
     @Override
     public int save(TicketDto dto) {
         return repository.save(mapper.dtoToEntity(dto)).getId();
