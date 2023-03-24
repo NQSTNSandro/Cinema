@@ -32,7 +32,7 @@ public class ClientMapper extends MapperInterface<Client, ClientDto> {
         clientDto.setPhone(client.getPhone());
         clientDto.setTitle(client.getTitle());
         clientDto.setType(client.isType());
-        clientDto.setOgrnip(clientDto.getOgrnip());
+        clientDto.setOgrnip(client.getOgrnip());
         return clientDto;
     }
 }

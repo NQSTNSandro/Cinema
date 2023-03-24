@@ -5,3 +5,7 @@ databaseChangeLog:
       file: db/01_room.sql
   - include:
       file: db/02_film.sql
+  - include:
+      file: db/03_session.sql
+  - include:
+      file: db/04_client.sql
