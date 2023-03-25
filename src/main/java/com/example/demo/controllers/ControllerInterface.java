@@ -17,4 +17,12 @@ public class ControllerInterface<S extends ServiceInterface,D> {
         return ResponseEntity.ok(service.read());
     }
 
+    public ResponseEntity<Integer> delete(int id){
+        return ResponseEntity.ok(service.remove(id));
+    }
+
+    public ResponseEntity<Integer> update(D dto){
+        return ResponseEntity.ok(service.update(dto));
+    }
+
 }

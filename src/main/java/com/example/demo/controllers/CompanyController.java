@@ -59,4 +59,39 @@ public class CompanyController extends ControllerInterface<CompanyService, Compa
     public ResponseEntity<List<CompanyDto>> read() {
         return super.read();
     }
+    @Operation(
+            operationId = "delete",
+            summary = "Удалить кампанию",
+            tags = {"CompanyApi"},
+            responses = {
+                    @ApiResponse(responseCode = "200", description = "success", content = {
+                            @Content(mediaType = "application/json", schema = @Schema(implementation = Integer.class))
+                    }),
+                    @ApiResponse(responseCode = "5XX", description = "Ошибка удаления кампании")
+            }
+    )
+    @RequestMapping(method = RequestMethod.DELETE,
+            value = "/delete/{id}")
+    @Override
+    public ResponseEntity<Integer> delete(@PathVariable(name = "id")int id) {
+        return super.delete(id);
+    }
+    @Operation(
+            operationId = "update",
+            summary = "Обновить информацию о кампании",
+            tags = {"CompanyApi"},
+            responses = {
+                    @ApiResponse(responseCode = "200", description = "success", content = {
+                            @Content(mediaType = "application/json", schema = @Schema(implementation = Integer.class))
+                    }),
+                    @ApiResponse(responseCode = "5XX", description = "Ошибка обновления кампании")
+            }
+    )
+
+    @RequestMapping(method = RequestMethod.POST,
+            value = "/update")
+    @Override
+    public ResponseEntity<Integer> update(@RequestBody CompanyDto dto) {
+        return super.update(dto);
+    }
 }

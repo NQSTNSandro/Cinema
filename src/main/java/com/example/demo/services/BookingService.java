@@ -1,7 +1,9 @@
 package com.example.demo.services;
 
 import com.example.demo.DTO.BookingDto;
+import com.example.demo.exception.BadInputException;
 import com.example.demo.mapper.BookingMapper;
+import com.example.demo.moduls.AdType;
 import com.example.demo.moduls.Booking;
 import com.example.demo.repositories.BookingRepository;
 import org.springframework.stereotype.Service;
@@ -24,5 +26,15 @@ public class BookingService extends ServiceInterface<Booking, BookingRepository,
     @Override
     public List<BookingDto> read() {
         return super.read();
+    }
+
+    @Override
+    public int update(BookingDto dto) {
+        if(repository.existsById(dto.getId())){
+            Booking booking= mapper.dtoToEntity(dto);
+            booking.setId(dto.getId());
+            return repository.save(booking).getId();
+        }
+        throw new BadInputException(String.format("Ненайдена запись по id: %d",dto.getId()));
     }
 }

@@ -1,8 +1,6 @@
 package com.example.demo.services;
 
-import com.example.demo.DTO.FilmDto;
 import com.example.demo.mapper.MapperInterface;
-import com.example.demo.moduls.Film;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -24,4 +22,13 @@ public abstract class ServiceInterface<C,R extends JpaRepository ,M extends Mapp
         }
         return dtos;
     }
+    public int remove(int id){
+        if(repository.existsById(id)){
+            repository.deleteById(id);
+        }
+        return id;
+    }
+    public abstract int update(D dto);
+
+
 }

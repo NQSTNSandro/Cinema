@@ -60,4 +60,39 @@ public class DirectorController extends ControllerInterface<DirectorService, Dir
     public ResponseEntity<List<DirectorDto>> read() {
         return super.read();
     }
+    @Operation(
+            operationId = "delete",
+            summary = "Удалить режисера",
+            tags = {"DirectorApi"},
+            responses = {
+                    @ApiResponse(responseCode = "200", description = "success", content = {
+                            @Content(mediaType = "application/json", schema = @Schema(implementation = Integer.class))
+                    }),
+                    @ApiResponse(responseCode = "5XX", description = "Ошибка удаления режисера")
+            }
+    )
+    @RequestMapping(method = RequestMethod.DELETE,
+            value = "/delete/{id}")
+    @Override
+    public ResponseEntity<Integer> delete(@PathVariable(name = "id")int id) {
+        return super.delete(id);
+    }
+    @Operation(
+            operationId = "update",
+            summary = "Обновить информацию о режисеру",
+            tags = {"DirectorApi"},
+            responses = {
+                    @ApiResponse(responseCode = "200", description = "success", content = {
+                            @Content(mediaType = "application/json", schema = @Schema(implementation = Integer.class))
+                    }),
+                    @ApiResponse(responseCode = "5XX", description = "Ошибка обновления режисера")
+            }
+    )
+
+    @RequestMapping(method = RequestMethod.POST,
+            value = "/update")
+    @Override
+    public ResponseEntity<Integer> update(@RequestBody DirectorDto dto) {
+        return super.update(dto);
+    }
 }

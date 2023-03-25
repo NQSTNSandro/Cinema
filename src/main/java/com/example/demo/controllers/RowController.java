@@ -60,4 +60,39 @@ public class RowController extends ControllerInterface<RowService, RowDto> {
     public ResponseEntity<List<RowDto>> read() {
         return super.read();
     }
+    @Operation(
+            operationId = "delete",
+            summary = "Удалить ряд",
+            tags = {"RowApi"},
+            responses = {
+                    @ApiResponse(responseCode = "200", description = "success", content = {
+                            @Content(mediaType = "application/json", schema = @Schema(implementation = Integer.class))
+                    }),
+                    @ApiResponse(responseCode = "5XX", description = "Ошибка удаления ряда")
+            }
+    )
+    @RequestMapping(method = RequestMethod.DELETE,
+            value = "/delete/{id}")
+    @Override
+    public ResponseEntity<Integer> delete(@PathVariable(name = "id")int id) {
+        return super.delete(id);
+    }
+    @Operation(
+            operationId = "update",
+            summary = "Обновить информацию о ряде",
+            tags = {"RowApi"},
+            responses = {
+                    @ApiResponse(responseCode = "200", description = "success", content = {
+                            @Content(mediaType = "application/json", schema = @Schema(implementation = Integer.class))
+                    }),
+                    @ApiResponse(responseCode = "5XX", description = "Ошибка обновления ряда")
+            }
+    )
+
+    @RequestMapping(method = RequestMethod.POST,
+            value = "/update")
+    @Override
+    public ResponseEntity<Integer> update(@RequestBody RowDto dto) {
+        return super.update(dto);
+    }
 }

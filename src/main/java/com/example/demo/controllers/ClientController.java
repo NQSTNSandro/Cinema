@@ -60,6 +60,39 @@ public class ClientController extends ControllerInterface<ClientService, ClientD
     public ResponseEntity<List<ClientDto>> read() {
         return super.read();
     }
+    @Operation(
+            operationId = "delete",
+            summary = "Удалить заказчика",
+            tags = {"ClientApi"},
+            responses = {
+                    @ApiResponse(responseCode = "200", description = "success", content = {
+                            @Content(mediaType = "application/json", schema = @Schema(implementation = Integer.class))
+                    }),
+                    @ApiResponse(responseCode = "5XX", description = "Ошибка удаления заказчика")
+            }
+    )
+    @RequestMapping(method = RequestMethod.DELETE,
+            value = "/delete/{id}")
+    @Override
+    public ResponseEntity<Integer> delete(int id) {
+        return super.delete(id);
+    }
+    @Operation(
+            operationId = "update",
+            summary = "Обновить информацию о заказчике",
+            tags = {"ClientApi"},
+            responses = {
+                    @ApiResponse(responseCode = "200", description = "success", content = {
+                            @Content(mediaType = "application/json", schema = @Schema(implementation = Integer.class))
+                    }),
+                    @ApiResponse(responseCode = "5XX", description = "Ошибка обновления заказчика")
+            }
+    )
 
-
+    @RequestMapping(method = RequestMethod.POST,
+            value = "/update")
+    @Override
+    public ResponseEntity<Integer> update(@RequestBody ClientDto dto) {
+        return super.update(dto);
+    }
 }

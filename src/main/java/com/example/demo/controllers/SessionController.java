@@ -15,12 +15,16 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequiredArgsConstructor
 @RequestMapping(value = "/v1/session", produces = "application/json")
 @Tag(name = "SessionAPI", description = "Работа с сеансами")
 @ResponseBody
-public class SessionController {
-    private final SessionService service;
+public class SessionController extends ControllerInterface<SessionService,SessionDto> {
+    public SessionController(SessionService service) {
+        super(service);
+    }
+
+
+
     @Operation(
             operationId = "create",
             summary = "Создать новы  сеанс",
@@ -35,9 +39,9 @@ public class SessionController {
     @RequestMapping(method = RequestMethod.POST,
             value = "/create",
             consumes = {"application/json"})
-    public ResponseEntity<Integer> save(@RequestBody SessionDto dto)
-    {
-        return ResponseEntity.ok(service.save(dto));
+    @Override
+    public ResponseEntity<Integer> save(@RequestBody SessionDto dto) {
+        return super.save(dto);
     }
 
     @Operation(
@@ -55,7 +59,43 @@ public class SessionController {
             method = RequestMethod.GET,
             value = "/read"
     )
+    @Override
     public ResponseEntity<List<SessionDto>> read() {
-        return ResponseEntity.ok(service.read());
+        return super.read();
+    }
+    @Operation(
+            operationId = "delete",
+            summary = "Удалить сеанс",
+            tags = {"SessionAPI"},
+            responses = {
+                    @ApiResponse(responseCode = "200", description = "success", content = {
+                            @Content(mediaType = "application/json", schema = @Schema(implementation = Integer.class))
+                    }),
+                    @ApiResponse(responseCode = "5XX", description = "Ошибка удаления сеанса")
+            }
+    )
+    @RequestMapping(method = RequestMethod.DELETE,
+            value = "/delete/{id}")
+    @Override
+    public ResponseEntity<Integer> delete(@PathVariable(name = "id")int id) {
+        return super.delete(id);
+    }
+    @Operation(
+            operationId = "update",
+            summary = "Обновить информацию о сеансе",
+            tags = {"SessionAPI"},
+            responses = {
+                    @ApiResponse(responseCode = "200", description = "success", content = {
+                            @Content(mediaType = "application/json", schema = @Schema(implementation = Integer.class))
+                    }),
+                    @ApiResponse(responseCode = "5XX", description = "Ошибка обновления сеанса")
+            }
+    )
+
+    @RequestMapping(method = RequestMethod.POST,
+            value = "/update")
+    @Override
+    public ResponseEntity<Integer> update(@RequestBody SessionDto dto) {
+        return super.update(dto);
     }
 }

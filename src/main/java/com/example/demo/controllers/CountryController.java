@@ -60,4 +60,39 @@ public class CountryController extends ControllerInterface<CountryService, Count
     public ResponseEntity<List<CountryDto>> read() {
         return super.read();
     }
+    @Operation(
+            operationId = "delete",
+            summary = "Удалить страну",
+            tags = {"CountryApi"},
+            responses = {
+                    @ApiResponse(responseCode = "200", description = "success", content = {
+                            @Content(mediaType = "application/json", schema = @Schema(implementation = Integer.class))
+                    }),
+                    @ApiResponse(responseCode = "5XX", description = "Ошибка удаления страны")
+            }
+    )
+    @RequestMapping(method = RequestMethod.DELETE,
+            value = "/delete/{id}")
+    @Override
+    public ResponseEntity<Integer> delete(@PathVariable(name = "id")int id) {
+        return super.delete(id);
+    }
+    @Operation(
+            operationId = "update",
+            summary = "Обновить информацию о страну",
+            tags = {"CountryApi"},
+            responses = {
+                    @ApiResponse(responseCode = "200", description = "success", content = {
+                            @Content(mediaType = "application/json", schema = @Schema(implementation = Integer.class))
+                    }),
+                    @ApiResponse(responseCode = "5XX", description = "Ошибка обновления страны")
+            }
+    )
+
+    @RequestMapping(method = RequestMethod.POST,
+            value = "/update")
+    @Override
+    public ResponseEntity<Integer> update(@RequestBody CountryDto dto) {
+        return super.update(dto);
+    }
 }

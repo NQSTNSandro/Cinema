@@ -17,6 +17,10 @@ import java.util.List;
 @Tag(name="AdTypeApi",description = "Работа с категориями рекламы")
 @ResponseBody
 public class AdTypeController extends ControllerInterface<AdTypeService, AdTypeDto> {
+    public AdTypeController(AdTypeService service) {
+        super(service);
+    }
+
     @Operation(
             operationId = "create",
             summary = "Создать новую категорию рекламы",
@@ -57,7 +61,40 @@ public class AdTypeController extends ControllerInterface<AdTypeService, AdTypeD
         return super.read();
     }
 
-    public AdTypeController(AdTypeService service) {
-        super(service);
+
+    @Operation(
+            operationId = "delete",
+            summary = "Удалить категорию",
+            tags = {"AdTypeApi"},
+            responses = {
+                    @ApiResponse(responseCode = "200", description = "success", content = {
+                            @Content(mediaType = "application/json", schema = @Schema(implementation = Integer.class))
+                    }),
+                    @ApiResponse(responseCode = "5XX", description = "Ошибка удаления категории")
+            }
+    )
+    @RequestMapping(method = RequestMethod.DELETE,
+            value = "/delete/{id}")
+    @Override
+    public ResponseEntity<Integer> delete(@PathVariable(name = "id")int id) {
+        return super.delete(id);
+    }
+    @Operation(
+            operationId = "update",
+            summary = "Обновить информацию о категории",
+            tags = {"AdTypeApi"},
+            responses = {
+                    @ApiResponse(responseCode = "200", description = "success", content = {
+                            @Content(mediaType = "application/json", schema = @Schema(implementation = Integer.class))
+                    }),
+                    @ApiResponse(responseCode = "5XX", description = "Ошибка обновления категории")
+            }
+    )
+
+    @RequestMapping(method = RequestMethod.POST,
+            value = "/update")
+    @Override
+    public ResponseEntity<Integer> update(@RequestBody AdTypeDto dto) {
+        return super.update(dto);
     }
 }
