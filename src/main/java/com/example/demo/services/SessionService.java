@@ -3,15 +3,11 @@ package com.example.demo.services;
 import com.example.demo.DTO.SessionDto;
 import com.example.demo.exception.BadInputException;
 import com.example.demo.mapper.SessionMapper;
-import com.example.demo.moduls.Row;
 import com.example.demo.moduls.Session;
-import com.example.demo.repositories.RoomRepository;
 import com.example.demo.repositories.SessionRepository;
-import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -35,5 +31,18 @@ public class SessionService extends ServiceInterface<Session,SessionRepository,S
             return repository.save(session).getId();
         }
         throw new BadInputException(String.format("Ненайден сеанс по id: %d",dto.getId()));
+    }
+    @Transactional
+    @Override
+    public List<SessionDto> read() {
+        return super.read();
+    }
+
+    @Transactional
+    public Session getSessionById(int id){
+        if(repository.existsById(id)){
+            return repository.getReferenceById(id);
+        }
+        throw new BadInputException(String.format("запись не найдена: %d", id));
     }
 }

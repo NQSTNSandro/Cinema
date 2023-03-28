@@ -30,4 +30,11 @@ public class RowService extends ServiceInterface<Row,RowRepository, RowMapper, R
         }
         throw new BadInputException(String.format("Ненайден ряд по id: %d",dto.getId()));
     }
+
+    public Row getRowById(int id) {
+        if(repository.existsById(id)){
+            return repository.getReferenceById(id);
+        }
+        throw new BadInputException(String.format("Ненайден ряд по id: %d", id));
+    }
 }

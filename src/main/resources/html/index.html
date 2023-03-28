@@ -121,6 +121,43 @@
         </div>
     </div>
 </div>
+<div class="tab-content" id="country-tabContent">
+    <div id="nav-country-create" class="tab-pane fade" role="tabpanel" aria-labelledby="nav-actor-create">
+        <div class="input-group mb-3">
+            <label for="actorFIO" class="form-label">ФИО</label>
+            <input type="text" class="form-control" id="countryFIO" dtoAttribute="name" placeholder="Введите страну">
+        </div>
+        <div class="input-group mb-3">
+            <button type="button" class="btn btn-primary submit" url="/v1/country/create">Primary</button>
+        </div>
+    </div>
+    <div id="nav-country-delete" class="tab-pane fade" role="tabpanel" aria-labelledby="nav-country-delete">
+        <div class="input-group mb-3">
+            <label for="countryIdToDelete" class="form-label">Выберите страну из списка</label>
+            <select class="form-select" id="countryIdToDelete" dtoAttribute="id" aria-label="Default select example">
+                <option selected>Выберите страну из списка</option>
+            </select>
+        </div>
+        <div class="input-group mb-3">
+            <button type="button" class="btn btn-primary submit" url="/v1/country/remove">Primary</button>
+        </div>
+    </div>
+    <div id="nav-country-edit" class="tab-pane fade" role="tabpanel" aria-labelledby="nav-country-edit-tab">
+        <div class="input-group mb-3">
+            <label for="countryIdToEdit" class="form-label">Выберите актера из списка</label>
+            <select class="form-select" id="countryIdToEdit" dtoAttribute="id" aria-label="Default select example">
+                <option selected>Выберите страну из списка</option>
+            </select>
+        </div>
+        <div class="input-group mb-3">
+            <label class="form-label">Страна</label>
+            <input type="text" class="form-control" dtoAttribute="name" placeholder="Введите название страны">
+        </div>
+        <div class="input-group mb-3">
+            <button type="button" class="btn btn-primary submit" url="/v1/country/update">Primary</button>
+        </div>
+    </div>
+</div>
 <script>
 
     (function( $ ){

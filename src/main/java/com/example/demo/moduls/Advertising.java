@@ -19,7 +19,7 @@ public class Advertising {
     @JoinColumn(name = "client_id")
     private Client client;
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "adType")
+    @JoinColumn(name = "ad_Type")
     private AdType adType;
     @ManyToMany(cascade = CascadeType.ALL,mappedBy = "advertisings")
     private Set<Session> sessions=new HashSet<>();

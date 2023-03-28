@@ -6,6 +6,7 @@ import lombok.Data;
 @Data
 public class BookingDto {
     private int id;
+    @JsonIgnore
     private float price;
     private int place;
     private boolean type;

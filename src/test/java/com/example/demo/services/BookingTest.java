@@ -22,11 +22,11 @@ public class BookingTest{
         BookingDto bookingDto=new BookingDto();
         bookingDto.setType(true);
         bookingDto.setPlace(1);
-        bookingDto.setPrice(15F);
         bookingDto.setSession(sessionService.read().get(0));
         bookingDto.setRow(rowService.read().get(0));
         int id=bookingService.save(bookingDto);
         Assertions.assertEquals(1,id);
         Assertions.assertEquals(1,bookingService.read().size());
+        Assertions.assertEquals(210,bookingService.read().get(0).getPrice());
     }
 }
