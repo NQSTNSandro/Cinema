@@ -20,7 +20,6 @@ public class AdTypeController extends ControllerInterface<AdTypeService, AdTypeD
     public AdTypeController(AdTypeService service) {
         super(service);
     }
-
     @Operation(
             operationId = "create",
             summary = "Создать новую категорию рекламы",

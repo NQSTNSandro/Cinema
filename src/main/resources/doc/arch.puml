@@ -1,0 +1,15 @@
+@startuml
+!include <tupadr3/common>
+
+!include <office/Servers/database_server>
+!include <office/Servers/application_server>
+
+title Cinema Architecture
+actor user
+package "Cinema" {
+    OFF_DATABASE_SERVER(db,DB)
+    OFF_APPLICATION_SERVER(app,App-Server)
+    user->app
+    app -> db
+}
+@enduml

@@ -3,12 +3,10 @@ package com.example.demo.services;
 import com.example.demo.DTO.BookingDto;
 import com.example.demo.exception.BadInputException;
 import com.example.demo.mapper.BookingMapper;
-import com.example.demo.moduls.AdType;
 import com.example.demo.moduls.Booking;
 import com.example.demo.moduls.Row;
 import com.example.demo.moduls.Session;
 import com.example.demo.repositories.BookingRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -37,7 +35,7 @@ public class BookingService extends ServiceInterface<Booking, BookingRepository,
             booking.setPrice(cost);
             return repository.save(booking).getId();
         }
-        else throw new BadInputException();
+        else throw new BadInputException("Цена поменялась, попробуйте ещё раз!");
     }
 
     @Transactional
