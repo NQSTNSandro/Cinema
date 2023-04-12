@@ -3,6 +3,7 @@ package com.example.demo.services;
 import com.example.demo.DTO.FilmDto;
 import com.example.demo.exception.BadInputException;
 import com.example.demo.mapper.FilmMapper;
+import com.example.demo.mapper.SqlMapper;
 import com.example.demo.repositories.*;
 import lombok.AllArgsConstructor;
 import com.example.demo.moduls.Film;
@@ -17,6 +18,7 @@ import java.util.List;
 public class FilmService {
     private final FilmRepository filmRepository;
     private final FilmMapper mapper;
+    private final SqlMapper sqlMapper;
     @Transactional
     public int save(FilmDto dto){
         Film film=mapper.dtoToEntity(dto);
@@ -60,5 +62,9 @@ public class FilmService {
             return filmRepository.save(film).getId();
         }
         throw new BadInputException(String.format("Ненайден фильм по id: %d",dto.getId()));
+    }
+    public List<FilmDto> getWinterFilms(){
+        filmRepository.winterFilms();
+        return sqlMapper.setToDto(filmRepository.winterFilms(),FilmDto.class);
     }
 }

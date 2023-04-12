@@ -1,5 +1,6 @@
 package com.example.demo.controllers;
 
+import com.example.demo.DTO.FilmDto;
 import com.example.demo.DTO.SessionDto;
 import com.example.demo.moduls.Session;
 import com.example.demo.services.SessionService;
@@ -99,4 +100,6 @@ public class SessionController extends ControllerInterface<SessionService,Sessio
     public ResponseEntity<Integer> update(@RequestBody SessionDto dto) {
         return super.update(dto);
     }
+
+
 }

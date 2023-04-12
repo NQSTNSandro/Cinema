@@ -111,6 +111,10 @@ public class FilmController {
         return ResponseEntity.ok(service.patch(dto));
 
     }
-
+    @RequestMapping(method = RequestMethod.GET,
+            value = "/winterFilms")
+    public List<FilmDto> getWinterFilms(){
+        return service.getWinterFilms();
+    }
 
 }

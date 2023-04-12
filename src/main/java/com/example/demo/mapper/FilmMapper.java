@@ -10,7 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional(propagation = Propagation.MANDATORY)
 @Service
 @AllArgsConstructor
-public class FilmMapper {
+public class FilmMapper extends MapperInterface<Film,FilmDto>{
     private final ActorMapper actorMapper;
     private final CountryMapper countryMapper;
     private final CompanyMapper companyMapper;
