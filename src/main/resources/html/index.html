@@ -102,19 +102,23 @@
             </select>
         </div>
         <div class="input-group mb-3">
-            <button type="button" class="btn btn-primary submit" url="/v1/actor/remove">Primary</button>
+            <button type="button" class="btn btn-primary submit" url="/v1/actor/delete">Primary</button>
         </div>
     </div>
     <div id="nav-actor-edit" class="tab-pane fade" role="tabpanel" aria-labelledby="nav-actor-edit-tab">
         <div class="input-group mb-3">
             <label for="actorIdToEdit" class="form-label">Выберите актера из списка</label>
-            <select class="form-select" id="actorIdToEdit" dtoAttribute="id" aria-label="Default select example">
+            <select class="form-select" id="actorIdToEdit" dtoAttribute="id" url="/v1/actor/read/" aria-label="Default select example">
                 <option selected>Выберите актера из списка</option>
             </select>
         </div>
         <div class="input-group mb-3">
             <label class="form-label">ФИО</label>
             <input type="text" class="form-control" dtoAttribute="fio" placeholder="Введите ФИО актера">
+        </div>
+        <div class="input-group mb-3">
+            <label class="form-label">ID</label>
+            <input type="text" class="form-control" dtoAttribute="id" placeholder="Введите ФИО актера">
         </div>
         <div class="input-group mb-3">
             <button type="button" class="btn btn-primary submit" url="/v1/actor/update">Primary</button>
@@ -174,7 +178,7 @@
                 data: JSON.stringify(obj),
                 dataType: "json",'contentType': 'application/json'
             }).done(function(data) {
-                debugger;
+                location.reload();
             });
         }
 
@@ -186,10 +190,11 @@
             }).done(handler);
         }
 
-        function onDelete() {
+        function onDeleteTab() {
             let handler = function(data) {
+                let el = $('#actorIdToDelete');
                 for(let x in data){
-                    $('#actorIdToDelete').append($('<option>', {
+                    el.append($('<option>', {
                         value: data[x].id,
                         text: data[x].fio
                     }));
@@ -198,7 +203,7 @@
             getRequest('/v1/actor/read',handler);
         }
 
-        function onUpdate() {
+        function onUpdateTab() {
             let handler = function(data) {
                 for(let x in data){
                     $('#actorIdToEdit').append($('<option>', {
@@ -206,13 +211,32 @@
                         text: data[x].fio
                     }));
                 }
+                $('#actorIdToEdit').on('change', function() {
+                    let handler = function(data) {
+                        debugger;
+                        let panel = $('#actorIdToEdit').parents('.tab-pane').first(),
+                            inputFields = panel.find('input, select').not('#actorIdToEdit'),
+                            x = 0;
+                        while(x<inputFields.length) {
+                            let el = $(inputFields[x]),
+                                dtoAttribute = el.attr('dtoattribute');
+                            if (el.is(':input')) {
+                                el.val(data[dtoAttribute]);
+                            } else if (el.is(':select')) {
+                                el.val(data[dtoAttribute]);
+                            }
+                            x++;
+                        }
+                    };
+                    getRequest($(this).attr('url')+this.value, handler);
+                });
             };
             getRequest('/v1/actor/read',handler);
         }
 
         function addActorListeners() {
-            onDelete();
-            onUpdate();
+            onDeleteTab();
+            onUpdateTab();
         }
 
         function addSubmitButtonsListeners() {
